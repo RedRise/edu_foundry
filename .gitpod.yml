@@ -7,9 +7,10 @@ tasks:
       source /home/gitpod/.bashrc
       foundryup
     init: forge install # run during the prebuild
-    # command: forge build
+    command: forge build
 
 vscode:
   extensions:
     - JuanBlanco.solidity
     - yzhang.markdown-all-in-one
+    - tomoki1207.pdf
