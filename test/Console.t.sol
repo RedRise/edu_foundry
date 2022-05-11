@@ -2,17 +2,23 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "forge-std/console.sol";
+import "forge-std/console2.sol";
 
 contract ConsoleTest is Test {
+
+    // event log_int(int256 p0);
 
     function testConsoleUintLog() public view {
         uint testVar = 256;
         console.log(testVar);
     }
 
-    function testConsoleUintLogUint() public view {
+    function testConsoleUintLogUint() public {
         uint testVar = 256;
+
+        // vm.expectEmit(false, false, false, false);
+        // emit log_uint(testVar);
+
         console.logUint(testVar);
     }
 
