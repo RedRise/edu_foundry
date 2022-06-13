@@ -7,35 +7,85 @@ import "src/01_Store.sol";
 
 contract Storetest is Test {
     Store myStore;
+    address initAdr;
+    address user;
 
     function setUp() public {
         myStore = new Store();
+        initAdr = address(0xb4c79daB8f259C7Aee6E5b2Aa729821864227e84);
+        user = address(7777);
     }
 
     function testStore33Wei() public {
-        address adr = address(0xb4c79daB8f259C7Aee6E5b2Aa729821864227e84);
-        uint256 balance;
-        uint256 amount;
-
-        balance = adr.balance;
+        uint256 balance = initAdr.balance;
         myStore.store{value: 33 wei}();
 
+        address adr;
+        uint256 amount;
         (adr, amount) = myStore.safes(0);
 
+        assertEq(adr, initAdr);
         assertEq(amount, 33);
         assertEq(balance - adr.balance, 33);
     }
 
     function testStoreAllBalance() public {
-        address adr = address(0xb4c79daB8f259C7Aee6E5b2Aa729821864227e84);
-        console.log(adr.balance);
+        uint256 balance = initAdr.balance;
+        myStore.store{value: balance}();
+        assertEq(initAdr.balance, 0);
 
-        uint256 amount = adr.balance;
-        myStore.store{value: amount}();
-
+        address adr;
+        uint256 amount;
         (adr, amount) = myStore.safes(0);
-        console.log(adr.balance);
+        assertEq(adr, initAdr);
+        assertEq(amount, balance);
+    }
 
-        assertEq(amount, 33);
+    function testStoreThenTake() public {
+        payable(user).transfer(1234);
+
+        vm.prank(user);
+        myStore.store{value: 34}();
+        assertEq(user.balance, 1200);
+
+        address adr;
+        uint256 amount;
+        (adr, amount) = myStore.safes(0);
+        assertEq(adr, user);
+        assertEq(amount, 34);
+
+        vm.prank(user);
+        myStore.take();
+        assertEq(user.balance, 1234);
+        (adr, amount) = myStore.safes(0);
+        assertEq(amount, 0);
+    }
+
+    function logSafes() public view {
+        for (uint256 i; i < myStore.getLen(); i++) {
+            console.log(myStore.getAdr(i));
+            console.log(myStore.getAmount(i));
+        }
+    }
+
+    function testStoreMultThenTake() public {
+        payable(user).transfer(10000 wei);
+
+        vm.prank(user);
+        myStore.store{value: 1}();
+        vm.prank(user);
+        myStore.store{value: 2}();
+        vm.prank(user);
+        myStore.store{value: 3}();
+        myStore.store{value: 4}();
+        myStore.store{value: 5}();
+
+        logSafes();
+
+        vm.prank(user);
+        myStore.take();
+        logSafes();
+
+        assert(true);
     }
 }
