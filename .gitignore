@@ -1,3 +1,14 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain
+old
+
+#Hardhat files
+cache_hardhat
+artifacts
+
 # Foundry
 out
 cache

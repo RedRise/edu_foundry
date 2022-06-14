@@ -23,82 +23,82 @@ contract Storetest is Test {
         user = address(7777);
     }
 
-    // function testStore33Wei() public {
-    //     uint256 balance = initAdr.balance;
-    //     myStore.store{value: 33 wei}();
+    function testStore33Wei() public {
+        uint256 balance = initAdr.balance;
+        myStore.store{value: 33 wei}();
 
-    //     address adr;
-    //     uint256 amount;
-    //     (adr, amount) = myStore.safes(0);
+        address adr;
+        uint256 amount;
+        (adr, amount) = myStore.safes(0);
 
-    //     assertEq(adr, initAdr);
-    //     assertEq(amount, 33);
-    //     assertEq(balance - adr.balance, 33);
-    // }
+        assertEq(adr, initAdr);
+        assertEq(amount, 33);
+        assertEq(balance - adr.balance, 33);
+    }
 
-    // function testStoreAllBalance() public {
-    //     uint256 balance = initAdr.balance;
-    //     myStore.store{value: balance}();
-    //     assertEq(initAdr.balance, 0);
+    function testStoreAllBalance() public {
+        uint256 balance = initAdr.balance;
+        myStore.store{value: balance}();
+        assertEq(initAdr.balance, 0);
 
-    //     address adr;
-    //     uint256 amount;
-    //     (adr, amount) = myStore.safes(0);
-    //     assertEq(adr, initAdr);
-    //     assertEq(amount, balance);
-    // }
+        address adr;
+        uint256 amount;
+        (adr, amount) = myStore.safes(0);
+        assertEq(adr, initAdr);
+        assertEq(amount, balance);
+    }
 
-    // function testStoreThenTake() public {
-    //     payable(user).transfer(1234);
-
-    //     vm.prank(user);
-    //     myStore.store{value: 34}();
-    //     assertEq(user.balance, 1200);
-
-    //     address adr;
-    //     uint256 amount;
-    //     (adr, amount) = myStore.safes(0);
-    //     assertEq(adr, user);
-    //     assertEq(amount, 34);
-
-    //     vm.prank(user);
-    //     myStore.take();
-    //     assertEq(user.balance, 1234);
-    //     (adr, amount) = myStore.safes(0);
-    //     assertEq(amount, 0);
-    // }
-
-    // function testStoreMultThenTake() public {
-    //     payable(user).transfer(10000 wei);
-
-    //     vm.prank(user);
-    //     myStore.store{value: 1}();
-    //     vm.prank(user);
-    //     myStore.store{value: 2}();
-    //     vm.prank(user);
-    //     myStore.store{value: 3}();
-    //     myStore.store{value: 4}();
-    //     myStore.store{value: 5}();
-
-    //     vm.prank(user);
-    //     myStore.take();
-
-    //     assert(true);
-    // }
-
-    function testAccessSafes() public {
-        vm.deal(user, 123 wei);
+    function testStoreThenTake() public {
+        payable(user).transfer(1234);
 
         vm.prank(user);
-        myStore.store{value: 123}();
+        myStore.store{value: 34}();
+        assertEq(user.balance, 1200);
 
-        console.log(gasleft());
-        do {
-            payable(user).transfer(1);
-        } while (gasleft() > 10000);
-        console.log(gasleft());
-        do {} while (gasleft() > 500);
-        vm.expectRevert();
+        address adr;
+        uint256 amount;
+        (adr, amount) = myStore.safes(0);
+        assertEq(adr, user);
+        assertEq(amount, 34);
+
+        vm.prank(user);
         myStore.take();
+        assertEq(user.balance, 1234);
+        (adr, amount) = myStore.safes(0);
+        assertEq(amount, 0);
     }
+
+    function testStoreMultThenTake() public {
+        payable(user).transfer(10000 wei);
+
+        vm.startPrank(user);
+        myStore.store{value: 1}();
+        myStore.store{value: 2}();
+        myStore.store{value: 3}();
+        myStore.store{value: 4}();
+        myStore.store{value: 5}();
+
+        myStore.take();
+
+        assert(true);
+    }
+
+    // function testAccessSafes() public {
+    //     vm.deal(user, 123 wei);
+
+    //     vm.prank(user);
+    //     myStore.store{value: 123}();
+
+    //     console.log(gasleft());
+    //     do {
+    //         payable(user).transfer(1);
+    //     } while (gasleft() > 10000);
+    //     console.log(gasleft());
+
+    //     do {} while (gasleft() > 800);
+    //     console.log(gasleft());
+
+    //     vm.expectRevert();
+    //     myStore.take();
+    // }
 }

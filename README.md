@@ -1,20 +1,15 @@
-# EDU FOUNDRY
+# Basic Sample Hardhat Project
 
-## Setup/Install
+This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
 
-- https://book.getfoundry.sh/
-  - ```curl -L https://foundry.paradigm.xyz | bash```
+Try running some of the following tasks:
 
-## Points d'attention
-
-- La compatibilité hardhat est assurée par l'option ```--hh```, voir [project layout](https://book.getfoundry.sh/projects/project-layout.html)
-
-## Journal
-
-- [References](https://github.com/crisgarner/awesome-foundry)
--Looking at [WH challenges](https://github.com/QGarchery/hack-smart-contract/blob/master/contracts/SolidityHackingWorkshopV8.sol)
-- init gitpod config 
-  - curl https://raw.githubusercontent.com/mlgarchery/desplit/master/.gitpod.yml > .gitpod.yml
-- configuration [shortcut focus terminal ](https://superuser.com/a/1343695)
-- les events de log sont presents dans DSTest forge-std/src/test.sol
-- we can test event with vm.expectEmit (see cheatcodes)
+```shell
+npx hardhat accounts
+npx hardhat compile
+npx hardhat clean
+npx hardhat test
+npx hardhat node
+node scripts/sample-script.js
+npx hardhat help
+```
