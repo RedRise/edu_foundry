@@ -5,16 +5,15 @@ import "forge-std/Test.sol";
 import "forge-std/console2.sol";
 
 contract ConsoleTest is Test {
-
     // event log_int(int256 p0);
 
     function testConsoleUintLog() public view {
-        uint testVar = 256;
+        uint256 testVar = 256;
         console.log(testVar);
     }
 
-    function testConsoleUintLogUint() public {
-        uint testVar = 256;
+    function testConsoleUintLogUint() public view {
+        uint256 testVar = 256;
 
         // vm.expectEmit(false, false, false, false);
         // emit log_uint(testVar);
@@ -29,7 +28,7 @@ contract ConsoleTest is Test {
     // }
 
     function testConsoleIntLogInt() public view {
-        int testVar = -256;
+        int256 testVar = -256;
         console.logInt(testVar);
     }
 
@@ -43,6 +42,4 @@ contract ConsoleTest is Test {
         int256 testVar = -256;
         console.logInt(testVar);
     }
-
-    
 }

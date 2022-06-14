@@ -5,7 +5,14 @@ import "forge-std/Test.sol";
 import "forge-std/console2.sol";
 import "src/01_Store.sol";
 
+// https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
+
 contract Storetest is Test {
+    struct SafeLoc {
+        address owner;
+        uint256 amount;
+    }
+
     Store myStore;
     address initAdr;
     address user;
@@ -16,76 +23,82 @@ contract Storetest is Test {
         user = address(7777);
     }
 
-    function testStore33Wei() public {
-        uint256 balance = initAdr.balance;
-        myStore.store{value: 33 wei}();
+    // function testStore33Wei() public {
+    //     uint256 balance = initAdr.balance;
+    //     myStore.store{value: 33 wei}();
 
-        address adr;
-        uint256 amount;
-        (adr, amount) = myStore.safes(0);
+    //     address adr;
+    //     uint256 amount;
+    //     (adr, amount) = myStore.safes(0);
 
-        assertEq(adr, initAdr);
-        assertEq(amount, 33);
-        assertEq(balance - adr.balance, 33);
-    }
+    //     assertEq(adr, initAdr);
+    //     assertEq(amount, 33);
+    //     assertEq(balance - adr.balance, 33);
+    // }
 
-    function testStoreAllBalance() public {
-        uint256 balance = initAdr.balance;
-        myStore.store{value: balance}();
-        assertEq(initAdr.balance, 0);
+    // function testStoreAllBalance() public {
+    //     uint256 balance = initAdr.balance;
+    //     myStore.store{value: balance}();
+    //     assertEq(initAdr.balance, 0);
 
-        address adr;
-        uint256 amount;
-        (adr, amount) = myStore.safes(0);
-        assertEq(adr, initAdr);
-        assertEq(amount, balance);
-    }
+    //     address adr;
+    //     uint256 amount;
+    //     (adr, amount) = myStore.safes(0);
+    //     assertEq(adr, initAdr);
+    //     assertEq(amount, balance);
+    // }
 
-    function testStoreThenTake() public {
-        payable(user).transfer(1234);
+    // function testStoreThenTake() public {
+    //     payable(user).transfer(1234);
+
+    //     vm.prank(user);
+    //     myStore.store{value: 34}();
+    //     assertEq(user.balance, 1200);
+
+    //     address adr;
+    //     uint256 amount;
+    //     (adr, amount) = myStore.safes(0);
+    //     assertEq(adr, user);
+    //     assertEq(amount, 34);
+
+    //     vm.prank(user);
+    //     myStore.take();
+    //     assertEq(user.balance, 1234);
+    //     (adr, amount) = myStore.safes(0);
+    //     assertEq(amount, 0);
+    // }
+
+    // function testStoreMultThenTake() public {
+    //     payable(user).transfer(10000 wei);
+
+    //     vm.prank(user);
+    //     myStore.store{value: 1}();
+    //     vm.prank(user);
+    //     myStore.store{value: 2}();
+    //     vm.prank(user);
+    //     myStore.store{value: 3}();
+    //     myStore.store{value: 4}();
+    //     myStore.store{value: 5}();
+
+    //     vm.prank(user);
+    //     myStore.take();
+
+    //     assert(true);
+    // }
+
+    function testAccessSafes() public {
+        vm.deal(user, 123 wei);
 
         vm.prank(user);
-        myStore.store{value: 34}();
-        assertEq(user.balance, 1200);
+        myStore.store{value: 123}();
 
-        address adr;
-        uint256 amount;
-        (adr, amount) = myStore.safes(0);
-        assertEq(adr, user);
-        assertEq(amount, 34);
-
-        vm.prank(user);
+        console.log(gasleft());
+        do {
+            payable(user).transfer(1);
+        } while (gasleft() > 10000);
+        console.log(gasleft());
+        do {} while (gasleft() > 500);
+        vm.expectRevert();
         myStore.take();
-        assertEq(user.balance, 1234);
-        (adr, amount) = myStore.safes(0);
-        assertEq(amount, 0);
-    }
-
-    function logSafes() public view {
-        for (uint256 i; i < myStore.getLen(); i++) {
-            console.log(myStore.getAdr(i));
-            console.log(myStore.getAmount(i));
-        }
-    }
-
-    function testStoreMultThenTake() public {
-        payable(user).transfer(10000 wei);
-
-        vm.prank(user);
-        myStore.store{value: 1}();
-        vm.prank(user);
-        myStore.store{value: 2}();
-        vm.prank(user);
-        myStore.store{value: 3}();
-        myStore.store{value: 4}();
-        myStore.store{value: 5}();
-
-        logSafes();
-
-        vm.prank(user);
-        myStore.take();
-        logSafes();
-
-        assert(true);
     }
 }

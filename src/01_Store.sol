@@ -25,16 +25,4 @@ contract Store {
             }
         }
     }
-
-    function getLen() public view returns (uint256) {
-        return safes.length;
-    }
-
-    function getAmount(uint256 i) public view returns (uint256) {
-        return safes[i].amount;
-    }
-
-    function getAdr(uint256 i) public view returns (address) {
-        return safes[i].owner;
-    }
 }

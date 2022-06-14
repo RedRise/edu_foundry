@@ -11,6 +11,7 @@
 
 ## Journal
 
+- [References](https://github.com/crisgarner/awesome-foundry)
 -Looking at [WH challenges](https://github.com/QGarchery/hack-smart-contract/blob/master/contracts/SolidityHackingWorkshopV8.sol)
 - init gitpod config 
   - curl https://raw.githubusercontent.com/mlgarchery/desplit/master/.gitpod.yml > .gitpod.yml
