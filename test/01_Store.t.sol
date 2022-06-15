@@ -1,18 +1,15 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+import "src/01_Store.sol";
 import "forge-std/Test.sol";
 import "forge-std/console2.sol";
-import "src/01_Store.sol";
 
+// https://ethereum.stackexchange.com/a/68864
+// https://blockchain-academy.hs-mittweida.de/courses/solidity-coding-beginners-to-intermediate/lessons/solidity-2-sending-ether-receiving-ether-emitting-events/topic/sending-ether-send-vs-transfer-vs-call/
 // https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
 
 contract Storetest is Test {
-    struct SafeLoc {
-        address owner;
-        uint256 amount;
-    }
-
     Store myStore;
     address initAdr;
     address user;

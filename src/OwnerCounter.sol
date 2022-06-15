@@ -1,11 +1,9 @@
-// UNLICENSED
+//SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
-
 
 error UnAuthorized();
 
 contract OwnerCounter {
-
     address public immutable owner;
     uint256 public count;
 
@@ -15,11 +13,10 @@ contract OwnerCounter {
     }
 
     function increment() external {
-        if (msg.sender != owner){
+        if (msg.sender != owner) {
             revert UnAuthorized();
         }
 
         count++;
     }
-
 }

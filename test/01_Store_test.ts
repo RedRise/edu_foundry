@@ -12,13 +12,20 @@ describe("Store", function () {
     await myStore.deployed();
 
     const balanceBefore = await ethers.provider.getBalance(user);
-    await myStore.store({ value: 123 });
+    await myStore.store({ value: balanceBefore.div(2) });
 
     const safe = await myStore.safes(0);
     console.log(safe.owner);
-    expect(safe.amount).to.equal(123);
+    expect(safe.amount).to.equal(balanceBefore.div(2));
 
-    await myStore.take();
+    console.log("Balance 1: " + await ethers.provider.getBalance(user));
+    try {
+      await myStore.take({ gasLimit: 33126 + 4799 });
+    } catch {
+
+    }
+    console.log("Balance 2: " + await ethers.provider.getBalance(user));
+
     // expect(await ethers.provider.getBalance(user)).to.equal(balanceBefore);
 
   });

@@ -1,15 +1,16 @@
-# Basic Sample Hardhat Project
+# EDUCATIONAL FOUNDRY REPO
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+## Installation
 
-Try running some of the following tasks:
+## Steps followed to setup this repo
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+- Install Foundry
+- [Install Hardhat](https://book.getfoundry.sh/config/hardhat.html)
+- Init Hardhat
+- Setup Hardhat typescript compatibility
+- Install Hardhat add-ins
+
+## TODIG
+
+- receive + fallback
+

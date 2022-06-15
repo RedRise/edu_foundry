@@ -1,13 +1,13 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
+import "forge-std/console2.sol";
 
 contract Greeter {
     string private greeting;
 
     constructor(string memory _greeting) {
-        console.log("Deploying a Greeter with greeting:", _greeting);
+        console2.log("Deploying a Greeter with greeting:", _greeting);
         greeting = _greeting;
     }
 
@@ -16,7 +16,11 @@ contract Greeter {
     }
 
     function setGreeting(string memory _greeting) public {
-        console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
+        console2.log(
+            "Changing greeting from '%s' to '%s'",
+            greeting,
+            _greeting
+        );
         greeting = _greeting;
     }
 }
