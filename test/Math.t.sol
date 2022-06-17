@@ -25,4 +25,14 @@ contract MathTest is Test {
 
         assert(true);
     }
+
+    function testAbiEncode() public view {
+        uint256 i;
+
+        for (i = 0; i < 100; ++i) {
+            console.logBytes32(keccak256(abi.encode(false, i)));
+        }
+
+        assert(true);
+    }
 }
