@@ -12,7 +12,6 @@ contract VulnerableVault {
 
     function withdrawTransfer() public {
         uint256 amount = _balanceOf[msg.sender];
-        console2.log("[VulnerableTransfer:withdrawCall] Amount", amount);
         if (0 < amount) {
             console2.log("[VulnerableVault:withdrawTransfer] BeforeTransfer");
             payable(msg.sender).transfer(amount);
@@ -23,7 +22,6 @@ contract VulnerableVault {
 
     function withdrawSend() public {
         uint256 amount = _balanceOf[msg.sender];
-        console2.log("[VulnerableVault:withdrawSend] Amount", amount);
         if (0 < amount) {
             console2.log("[VulnerableVault:withdrawSend] BeforeSend");
             bool success = payable(msg.sender).send(amount);
@@ -33,9 +31,7 @@ contract VulnerableVault {
     }
 
     function withdrawCall() public {
-        console2.log("[VulnerableVault:withdrawCall] gasleft", gasleft());
         uint256 amount = _balanceOf[msg.sender];
-        console2.log("[VulnerableVault:withdrawCall] Amount", amount);
         if (0 < amount) {
             console2.log("[VulnerableVault:withdrawCall] BeforeCall");
             (bool success, ) = msg.sender.call{value: amount}("");

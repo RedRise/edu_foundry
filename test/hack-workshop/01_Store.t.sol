@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "src/01_Store.sol";
+import "src/hack-workshop/01_Store.sol";
 import "forge-std/Test.sol";
 import "forge-std/console2.sol";
 

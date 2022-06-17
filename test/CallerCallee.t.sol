@@ -18,7 +18,7 @@ contract CallerCalleeTest is Test {
 
         assertEq(result, 42);
 
-        // // allowed even withou receive function implemented
+        // // allowed even without receive function implemented
         // vm.deal(address(cons), 1 ether);
         payable(address(cons)).transfer(1000000000);
 
