@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import "forge-std/console2.sol";
-import "src/hack-workshop/02_DiscountedBuy.sol";
+import "hack-workshop/SolidityHackingWorkshopV8.sol";
 
 contract DiscountedBuyTest is Test {
     DiscountedBuy discount;

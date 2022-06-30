@@ -35,4 +35,10 @@ contract MathTest is Test {
 
         assert(true);
     }
+
+    function testUintSubstractionUnderFlow() public {
+        uint256 i = 10;
+        i -= 15;
+        assertGt(i, 0);
+    }
 }
