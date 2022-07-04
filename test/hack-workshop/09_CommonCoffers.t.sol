@@ -31,4 +31,8 @@ contract CommonCoffersTest is Test {
         vm.prank(alice);
         bank.withdraw(100);
     }
+
+    function testInProgress() public {
+        assert(false);
+    }
 }
