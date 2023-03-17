@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "src/hack-workshop/03_HeadOrTail.sol";
+import "hack-workshop/SolidityHackingWorkshopV8.sol";
 
 contract HeadOrTailTest is Test {
     HeadOrTail game;

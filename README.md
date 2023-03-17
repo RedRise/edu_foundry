@@ -2,8 +2,13 @@
 
 ## Installation
 
+- [Git submodules](https://newbedev.com/pull-git-submodules-after-cloning-project-from-github)
+  1. ```git submodule update --init```
+  2. ```git pull --recurse-submodules```
+  3. ```git submodule update --init --recursive```
 - https://book.getfoundry.sh/
   - ```curl -L https://foundry.paradigm.xyz | bash```
+- ```npm install```
 
 ## Steps followed to setup this repo
 
@@ -17,7 +22,11 @@
 
 - [References](https://github.com/crisgarner/awesome-foundry)
 - Looking at [WH challenges]()
+<<<<<<< HEAD
 - https://github.com/sigp/solidity-security-blog
+=======
+- https://docs.avax.network/dapps/smart-contracts/using-foundry-with-the-avalanche-c-chain
+>>>>>>> 6702afd3d2b9646d77f615b7658992ad4784e446
 
 ## Content
 
@@ -39,4 +48,4 @@
 
 - receive vs fallback
 - revert / out of gas
-- can we call {value: 1 ether} ?
+- on Coffers, automatic getter of public struct{ uint, mapping} only returns uint
