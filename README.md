@@ -17,6 +17,7 @@
 
 - [References](https://github.com/crisgarner/awesome-foundry)
 - Looking at [WH challenges]()
+- https://github.com/sigp/solidity-security-blog
 
 ## Content
 

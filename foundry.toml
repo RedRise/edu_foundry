@@ -1,9 +1,9 @@
-[default]
+[profile.default]
 src = 'src'
 out = 'out'
 libs = ['lib']
 
 # The address of `msg.sender` in tests
-sender = '0x00a329c0648769a73afac7f9381e08fb43dbea72'
+sender = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
