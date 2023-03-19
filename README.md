@@ -22,8 +22,12 @@
 
 - [References](https://github.com/crisgarner/awesome-foundry)
 - Looking at [WH challenges]()
+<<<<<<< HEAD
+- https://github.com/sigp/solidity-security-blog
+=======
 - https://docs.avax.network/dapps/smart-contracts/using-foundry-with-the-avalanche-c-chain
 - https://github.com/nicolasgarcia214/damn-vulnerable-defi-foundry
+>>>>>>> 6702afd3d2b9646d77f615b7658992ad4784e446
 
 ## Content
 
