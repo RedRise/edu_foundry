@@ -23,6 +23,7 @@
 - [References](https://github.com/crisgarner/awesome-foundry)
 - Looking at [WH challenges]()
 - https://docs.avax.network/dapps/smart-contracts/using-foundry-with-the-avalanche-c-chain
+- https://github.com/nicolasgarcia214/damn-vulnerable-defi-foundry
 
 ## Content
 
