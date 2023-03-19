@@ -50,3 +50,4 @@
 - receive vs fallback
 - revert / out of gas
 - on Coffers, automatic getter of public struct{ uint, mapping} only returns uint
+- What does forge update do? https://github.com/foundry-rs/foundry/issues/3720

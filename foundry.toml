@@ -3,7 +3,8 @@ src = 'src'
 out = 'out'
 libs = ['lib']
 
-# The address of `msg.sender` in tests
-sender = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
+[rpc_endpoints]
+local = 'http://127.0.0.1:8545'
+
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
